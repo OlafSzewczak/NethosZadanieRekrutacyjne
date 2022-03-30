@@ -23,8 +23,8 @@ public class KontoBankoweSerwis{
         return kontoBankoweRepository.findWithKontrahentId(kontrahentId);
     }
 
-    public void zaktualizuj(String numerKonta, StanWeryfikacji stanWeryfikacji, LocalDateTime dataWeryfikacji) {
-        kontoBankoweRepository.updateKontoBankowe(numerKonta, stanWeryfikacji, dataWeryfikacji);
+    public void zaktualizuj(Long id, StanWeryfikacji stanWeryfikacji, LocalDateTime dataWeryfikacji) {
+        kontoBankoweRepository.updateKontoBankowe(id, stanWeryfikacji, dataWeryfikacji);
     }
 
 

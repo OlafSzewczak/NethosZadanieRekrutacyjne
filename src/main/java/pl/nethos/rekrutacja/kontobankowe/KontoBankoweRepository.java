@@ -23,12 +23,12 @@ public class KontoBankoweRepository {
                 .getResultList();
     }
 
-    public void updateKontoBankowe(String numerKonta, StanWeryfikacji stanWeryfikacji, LocalDateTime dataWeryfikacji) {
+    public void updateKontoBankowe(Long id, StanWeryfikacji stanWeryfikacji, LocalDateTime dataWeryfikacji) {
 
         em.createQuery(
-                        "UPDATE KontoBankowe kb SET kb.dataWeryfikacji = :dataWeryfikacji, kb.stanWeryfikacji = :stanWeryfikacji WHERE kb.numer = :numerKonta "
+                        "UPDATE KontoBankowe kb SET kb.dataWeryfikacji = :dataWeryfikacji, kb.stanWeryfikacji = :stanWeryfikacji WHERE kb.id = :id "
                 )
-                .setParameter("numerKonta", numerKonta)
+                .setParameter("id", id)
                 .setParameter("stanWeryfikacji", stanWeryfikacji)
                 .setParameter("dataWeryfikacji", dataWeryfikacji)
                 .executeUpdate();

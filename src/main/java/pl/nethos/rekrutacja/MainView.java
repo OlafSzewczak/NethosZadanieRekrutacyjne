@@ -43,10 +43,10 @@ public class MainView extends VerticalLayout {
         zaktualizujListeKontrahentow();
     }
 
-    private void wyslijZapytanie(String numerKonta, Long kontrahentId) throws IOException {
+    private void wyslijZapytanie(Long id, String numerKonta, Long kontrahentId) throws IOException {
         String kontrahentNip = kontrahentSerwis.pobierzNip(kontrahentId);
         RejestrPodatnikowResponse rejestrPodatnikowResponse = nadawcaZapytanSerwis.sprawdzStatusPodatnika(numerKonta, kontrahentNip, LocalDate.now().toString());
-        kontoBankoweSerwis.zaktualizuj(numerKonta, rejestrPodatnikowResponse.getStanWeryfikacji(), rejestrPodatnikowResponse.getRequestDateTime());
+        kontoBankoweSerwis.zaktualizuj(id, rejestrPodatnikowResponse.getStanWeryfikacji(), rejestrPodatnikowResponse.getRequestDateTime());
         zaktualizujListeKontBankowych(kontrahentId);
     }
 
@@ -69,7 +69,7 @@ public class MainView extends VerticalLayout {
 
         kontoBankoweGrid.addComponentColumn(t -> new Button("Weryfikuj", buttonClickEvent -> {
             try {
-                wyslijZapytanie(t.getNumer(), t.getIdKontrahent());
+                wyslijZapytanie(t.getId(), t.getNumer(), t.getIdKontrahent());
             } catch (IOException e) {
                 e.printStackTrace();
             }
