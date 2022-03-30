@@ -13,7 +13,7 @@ import pl.nethos.rekrutacja.kontobankowe.KontoBankowe;
 import pl.nethos.rekrutacja.kontrahent.Kontrahent;
 import pl.nethos.rekrutacja.serwis.KontoBankoweSerwis;
 import pl.nethos.rekrutacja.serwis.KontrahentSerwis;
-import pl.nethos.rekrutacja.serwis.NadawcaZapytanSerwis;
+import pl.nethos.rekrutacja.http.NadawcaZapytanSerwis;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -46,7 +46,7 @@ public class MainView extends VerticalLayout {
     private void wyslijZapytanie(Long id, String numerKonta, Long kontrahentId) throws IOException {
         String kontrahentNip = kontrahentSerwis.pobierzNip(kontrahentId);
         RejestrPodatnikowResponse rejestrPodatnikowResponse = nadawcaZapytanSerwis.sprawdzStatusPodatnika(numerKonta, kontrahentNip, LocalDate.now().toString());
-        kontoBankoweSerwis.zaktualizuj(id, rejestrPodatnikowResponse.getStanWeryfikacji(), rejestrPodatnikowResponse.getRequestDateTime());
+        kontoBankoweSerwis.zaktualizuj(id, rejestrPodatnikowResponse.getStanWeryfikacji(), rejestrPodatnikowResponse.getRequestDateTime(), rejestrPodatnikowResponse.isAktywne());
         zaktualizujListeKontBankowych(kontrahentId);
     }
 

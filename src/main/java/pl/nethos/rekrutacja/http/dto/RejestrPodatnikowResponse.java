@@ -10,5 +10,6 @@ public class RejestrPodatnikowResponse {
 
     StanWeryfikacji stanWeryfikacji;
     LocalDateTime requestDateTime;
+    boolean aktywne;
 
 }
