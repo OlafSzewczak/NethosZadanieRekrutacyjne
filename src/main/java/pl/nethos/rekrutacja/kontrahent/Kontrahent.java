@@ -1,41 +1,38 @@
 package pl.nethos.rekrutacja.kontrahent;
 
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Kontrahent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "kontrahent_gen")
     @SequenceGenerator(name="kontrahent_gen", sequenceName = "kontrahent_seq", allocationSize = 1)
-    private long id;
+    private Long id;
 
     private String nazwa;
 
     private String nip;
 
-    public long getId() {
-        return id;
-    }
-
-    public String getNazwa() {
-        return nazwa;
-    }
-
-    public void setNazwa(String nazwa) {
-        this.nazwa = nazwa;
-    }
-
-    public void setNip(String nip) {
-        this.nip = nip;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Kontrahent that = (Kontrahent) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
-    public String toString() {
-        return "Kontrahent{" +
-                "id=" + id +
-                ", nazwa='" + nazwa + '\'' +
-                ", nip='" + nip + '\'' +
-                '}';
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

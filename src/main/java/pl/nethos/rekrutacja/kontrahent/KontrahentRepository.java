@@ -17,4 +17,11 @@ public class KontrahentRepository {
     public List<Kontrahent> all() {
         return em.createQuery("SELECT k FROM Kontrahent k", Kontrahent.class).getResultList();
     }
+
+    public String findNipWithId(Long id) {
+        return em.createQuery("SELECT k.nip FROM Kontrahent k WHERE k.id = :id",String.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
 }
